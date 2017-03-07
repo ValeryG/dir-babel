@@ -22,6 +22,10 @@ var argv = require('yargs')
     alias: 'o',
     describe: 'output folder'
 })
+.option('skip-initial-build', {
+    alias: 'i',
+    describe: 'skip inital build'
+})
 .option('watch', {
     alias: 'w',
     describe: 'watch source files a n rebuild as needed'
@@ -90,7 +94,10 @@ const compile = (files) => {
 
 const getFiles = () =>  (glob.sync(`./${argv['src-dir']}/**/*`, {nodir: true}))
 
-compile(getFiles());
+console.log(argv["skip-initial-build"]);
+if (!argv["skip-initial-build"]) {
+  compile(getFiles());
+}
 
 if (argv.watch) {
     console.log('start watching');

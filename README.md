@@ -24,3 +24,4 @@ This will compare all source files in scr-dir and only transpile files that are 
 - --out-dir - destination folder (folder to put transpiled files to)
 - --watch  - run in watch mode
 - --copy-files - copy files that are not needed to be transplied (images, styles, e.t.c.). When given, all thoe files will be copied from src-dir for out-dir
+- --skip-initial-build - do not do initial build 
