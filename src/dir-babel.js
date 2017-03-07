@@ -94,7 +94,6 @@ const compile = (files) => {
 
 const getFiles = () =>  (glob.sync(`./${argv['src-dir']}/**/*`, {nodir: true}))
 
-console.log(argv["skip-initial-build"]);
 if (!argv["skip-initial-build"]) {
   compile(getFiles());
 }
