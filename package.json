@@ -1,0 +1,36 @@
+{
+  "name": "dir-babel",
+  "version": "1.0.0",
+  "description": "Little script on top of babel to compare src and lib before running babel on needed files",
+  "main": "lib/dir-babel.js",
+  "bin": {
+    "dir-babel": "./lib/dir-babel.js"
+  },
+  "scripts": {
+    "build": "babel src --out-dir lib",
+    "test": "exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ValeryG/dir-babel.git"
+  },
+  "author": "Val Gorodnichev",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.22.2",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "batch-promises": "0.0.3",
+    "chai": "^3.5.0",
+    "fs": "0.0.1-security",
+    "glob": "^7.1.1",
+    "mocha": "^3.2.0",
+    "mock-fs": "^4.0.0",
+    "yargs": "^7.0.1"
+  },
+  "keywords": [
+    "babel",
+    "babel-cli",
+    "build"
+  ]
+}
