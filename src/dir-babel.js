@@ -103,7 +103,6 @@ if (argv.watch) {
 
     fs.watch(argv['src-dir'], {recursive: true}, (et, fn) => {
         let files =  [];
-        console.log("detected:", et, fn);
 
         switch (et) {
             case "change":
