@@ -81,7 +81,6 @@ const compileFile = (srcF) => {
 
 
 const compile = (files) => {
-  console.log(files);
     batchPromises(20, files, f => compileFile(f)).then((results) => {
     }).catch((err) => {
         console.log(err);
