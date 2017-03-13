@@ -87,8 +87,10 @@ const compileFile = (srcF) => {
 const compile = (files) => {
     batchPromises(20, files, f => compileFile(f)).then((results) => {
     }).catch((err) => {
-        console.log(err);
-        process.exit(-1);
+        console.error(err);
+        if (!argv.watch) {
+            process.exit(-1);
+        }
     });
 }
 
