@@ -38,7 +38,8 @@ var argv = require('yargs')
 const srcRegExp = new RegExp(`^\.\/${argv['src-dir']}\/`);
 const babelRegExp = new RegExp(`^\.jsx?$`);
 
-const compileFile = (srcF) => {
+
+const compileFile = (srcF, rcStat) => {
     return new Promise((resolve, reject) => {
 
         const destF = srcF.replace(srcRegExp, `./${argv['out-dir']}/`).replace(/\.jsx$/, '.js');
@@ -49,8 +50,7 @@ const compileFile = (srcF) => {
         const srcStat = fs.existsSync(srcF) && fs.statSync(srcF);
         const destStat = fs.existsSync(destF) ? fs.statSync(destF): {mtime:new Date(-1)};
 
-
-        if (srcStat.mtime.getTime() < destStat.mtime.getTime()) {
+        if (srcStat.mtime.getTime() < destStat.mtime.getTime() && destStat.mtime.getTime() >= rcStat.mtime.getTime()) {
             console.log(`${logStr} ...skip`);
             return resolve({srcF});
         }
@@ -85,7 +85,8 @@ const compileFile = (srcF) => {
 
 
 const compile = (files) => {
-    batchPromises(20, files, f => compileFile(f)).then((results) => {
+    let rcStat = fs.existsSync(path.resolve('./.babelrc')) ? fs.statSync(path.resolve('./.babelrc')): {mtime:new Date(-1)};
+    batchPromises(20, files, f => compileFile(f, rcStat)).then((results) => {
     }).catch((err) => {
 
         console.error(err);
@@ -98,12 +99,17 @@ const compile = (files) => {
 
 const getFiles = () =>  (glob.sync(`./${argv['src-dir']}/**/*`, {nodir: true}))
 
+
 if (!argv["skip-initial-build"]) {
   compile(getFiles());
 }
 
 if (argv.watch) {
     console.log('start watching');
+
+    fs.watch(path.resolve('./.babelrc'), (et, fn) => {
+        compile(getFiles());
+    });
 
     fs.watch(argv['src-dir'], {recursive: true}, (et, fn) => {
         let files =  [];
