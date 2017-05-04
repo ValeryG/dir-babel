@@ -71,7 +71,7 @@ const compileFile = (srcF, rcStat) => {
             if (err) {
                 return reject({srcF, err});
             }
-            fs.writeFile(destF, res.code, err=> {
+            fs.writeFile(destF, res.code, {mode: srcStat.mode}, err=> {
                 if (err) {
                     return reject({srcF, err});
                 }
