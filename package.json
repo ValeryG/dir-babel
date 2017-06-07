@@ -28,6 +28,7 @@
     "babel-core": "^6.24.1",
     "batch-promises": "0.0.3",
     "glob": "^7.1.1",
+    "mkdirp": "^0.5.1",
     "yargs": ">=7.0.1"
   },
   "keywords": [
