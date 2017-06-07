@@ -1,6 +1,6 @@
 {
   "name": "dir-babel",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "Little script on top of babel to compare src and lib before running babel on needed files",
   "main": "lib/dir-babel.js",
   "bin": {
